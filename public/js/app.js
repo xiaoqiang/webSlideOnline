@@ -2528,7 +2528,7 @@ $.savePage = function() {
     clearTimeout(timer);
     timer = null;
     var code = $('#editor-textarea textarea').val();
-    code = htmlspecialchars(code);
+    code = encodeURIComponent(htmlspecialchars(code));
     
     $.ajax({
         url : '/savepage/',
@@ -2610,17 +2610,14 @@ $.webSlideInit = function() {
     $('#online').click(function(){
         $.ajax({
             url : '/page/'+sid,
-            type : 'GET',          
-            success : function(data) {
-                if(data) {
-                } else {
-                    alert('生成页面失败!');
-                }
-            }
+            type : 'GET'
         });
     });
     $('#download').click(function(){
-        alert('功能还在开发中...');
+        $.ajax({
+            url : '/zip/'+sid,
+            type : 'GET'
+        });
     });
 }
 var htmlspecialchars = function(str){
