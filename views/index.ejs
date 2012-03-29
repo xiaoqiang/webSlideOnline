@@ -29,7 +29,7 @@
                 <div class="conwrap hn-slide-con">
                     <div class="hn-slide-box">
                     <% for(var i = 0 ; i < max; i++) { %>                               
-                    <a class="page tile<%if(i == 0){%> tile_on<%}%>" href="javascript:"><span class="vector"><%if(i == 0){%>C<%}else{%>'<%}%></span><span class="title">第 <strong><%=i+1%></strong> 页</span></a>
+                    <a class="page tile<%if(i == 0){%> tile_on<%}%>" href="javascript:"><span class="vector"><%if(i == 0){%>C<%}else{%>'<%}%></span><span class="title">第 <strong><%=i+1%></strong> 页</span><%if(i > 0){%><span class="del">X</span><%}%></a>
                     <% } %>
                     <a class="tile hn-add-item" href="javascript:"><span class="vector">+</span><span class="title">新建</span></a>
                     </div>
@@ -49,7 +49,7 @@
         </div>
         <footer>
             <div class="con">
-                <h4> powered by <a href="http://www.xiaoqiang.org/" title="小强ORG">xiaoqiang.org</a> <a href="http://http://js8.in//" title="三水清">三水清</a></h4>
+                <h4> powered by <a target="_blank" href="http://www.xiaoqiang.org/" title="小强ORG">小强ORG</a> <a target="_blank" href="http://http://js8.in//" title="三水清">三水清</a></h4>
             </div>
         </footer>
         <script src="js/library.js"></script>
@@ -59,6 +59,16 @@
                 id = 1, 
                 sid = <%= sid %>;
             $.webSlideInit();
-        </script>   
+        </script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5789434-3']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>  
     </body>
 </html>

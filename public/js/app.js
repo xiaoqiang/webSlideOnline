@@ -2576,7 +2576,7 @@ $.webSlideInit = function() {
         });
     });
     $('.hn-add-item').bind("tap", function() {
-        var html = '<a class="tile page" href="javascript:"><span class="vector">\'</span><span class="title">第 <strong>' + (++max) + '</strong> 页</span></a>';
+        var html = '<a class="tile page" href="javascript:"><span class="vector">\'</span><span class="title">第 <strong>' + (++max) + '</strong> 页</span><span class="del">X</span></a>';
         $(this).before(html);
         var prev = $(this).prev(), tile_on = $('.tile_on');
         slide.refresh();
@@ -2619,6 +2619,37 @@ $.webSlideInit = function() {
             type : 'GET'
         });
     });
+    $('#hn-slide').delegate('.del', 'tap', function() {
+        var _this = $(this).parent(),_pid = _this.find('strong').text();
+        
+        $.ajax({
+            url : '/delpage/',
+            type : 'POST',
+            dataType : 'text',
+            data : {
+                'sid' : sid,
+                'id' : _pid
+            },
+            success : function(data) {
+                if(data) {
+                    if(id == _pid){
+                        _this.prev().trigger('tap');
+                    }else if(id > _pid){
+                        id--;
+                    }
+                    _this.nextAll('.page').each(function(){
+                        $(this).find('strong').text($(this).find('strong').text()-1);
+                    });
+                    _this.remove();
+                    max--;              
+                } else {
+                    alert('删除失败!');
+                }
+            }
+        });
+        return false;
+    });
+    
 }
 var htmlspecialchars = function(str){
     if (typeof(str) == "string") {

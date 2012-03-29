@@ -158,6 +158,38 @@ header a:hover {
     box-sizing: border-box;
     text-align: center;
 }
+.page .del{
+    display:none;
+    font-family: Icons;
+    height: 20px;
+    width: 20px;
+    background: #222;
+    background: -webkit-linear-gradient(#333, #111);
+    background: -moz-linear-gradient(#333, #111);
+    line-height: 20px;
+    text-align: center;
+    text-shadow: black 0px 1px 2px;
+    color: white;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    -moz-box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px inset, black 0px 2px 4px;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px inset, black 0px 2px 4px;
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px inset, black 0px 2px 4px;
+    font-size: 16px;
+    margin:-180px 0 0 120px;    
+}
+.page:hover .del{
+    display: block;
+}
+.page:hover .del:hover{
+    background: white;
+    text-shadow: none;
+    color: black;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 .t_left, .t_right{
     position: absolute;
     top:0;
@@ -369,6 +401,9 @@ min-height: 375px;
 #text .preview p {
     color: white;
     font-size: 17px;
+}
+#text .preview img{
+    max-width: 100%;
 }
 #text blockquote {
     border-left: 1px solid white;

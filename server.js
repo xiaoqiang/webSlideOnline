@@ -19,7 +19,7 @@ function getSid(){
     return now.getTime();
 }
 function createWebSlide(res, sid){
-    var webSlide = '{"pages": ["%23Hello%20WebSlide%23%0A%5Bmarkdown%5D(http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMarkdown)%E8%AF%AD%E6%B3%95%E5%BC%BA%E5%8A%9B%E9%A9%B1%E5%8A%A8"]}';
+    var webSlide = '{"pages": ["%23Hello%20WebSlide%23%0A%5Bmarkdown%5D(http%3A%2F%2Fzh.wikipedia.org%2Fwiki%2FMarkdown)%E8%AF%AD%E6%B3%95%E5%BC%BA%E5%8A%9B%E9%A9%B1%E5%8A%A8"]}';
     fs.writeFile('data/' + sid + '.json', webSlide, 'utf8', function(err){
         if (err) {
             throw err;
@@ -154,11 +154,6 @@ app.get('/zip/:sid', function(req, res) {
     }
 });
 
-
-
-
-
-
 app.get('/*', function(req, res){
     var sid = getSid();
     res.redirect('/' + sid);
@@ -193,6 +188,32 @@ app.post('/savepage/*', function(req, res){
             var webSlide = JSON.parse(data),ws;
             id = id > webSlide.pages.length + 1 ? webSlide.pages.length + 1 : id;   
             webSlide.pages[id-1] = code;
+            ws = JSON.stringify(webSlide);
+            fs.writeFile('data/' + sid + '.json', ws, 'utf8', function(err){
+                if (err) {
+                    res.write('0');
+                    res.end();
+                    throw err;
+                }else{
+                    res.write('1');
+                    res.end();
+                }                
+            });
+        }
+    });
+});
+app.post('/delpage/*', function(req, res){
+    var sid = req.body.sid, id = req.body.id;
+    fs.readFile('data/' + sid + '.json', 'utf8', function(err, data){
+        if (err) {                      
+            res.write('0');
+            res.end();
+            throw err;
+        }
+        else {
+            var webSlide = JSON.parse(data),ws;
+            id = id > webSlide.pages.length ? webSlide.pages.length : id;   
+            webSlide.pages.splice(id-1, 1);
             ws = JSON.stringify(webSlide);
             fs.writeFile('data/' + sid + '.json', ws, 'utf8', function(err){
                 if (err) {
